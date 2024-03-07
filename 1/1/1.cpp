@@ -1,8 +1,6 @@
 ﻿#include <iostream>
 #include <fstream>
 #include <string>
-std::ifstream file("in.txt");
-std::ofstream File("out.txt");
 
 class Adres {
 	private:
@@ -22,14 +20,16 @@ class Adres {
 
 		std::string adr() {
 			
-			std::string str = this->city + ", " + this->street + ", " + std::to_string(this->home) + ", " + std::to_string(this->flat);
-			File << str << std::endl;
-			return str;
+			return city + ", " + street + ", " + std::to_string(home) + ", " + std::to_string(flat);
 		}
 
 };
 
 int main() {
+
+	std::ifstream file("in.txt");
+	std::ofstream File("out.txt");
+
 	setlocale(LC_ALL, "Russian");
 	int num;
 	file >> num;
@@ -48,7 +48,7 @@ int main() {
 		file >> home;
 		file >> flat;
 		adr[i].inp_adr(city ,street, home, flat);
-		adr[i].adr();
+		File << adr[i].adr() << std::endl;
 	}
 
 	delete[] adr;
